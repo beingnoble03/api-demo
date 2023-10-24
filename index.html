@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #avatar {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Avatar Generator</h1>
+    <p>Enter your first name and last name to generate an avatar.</p>
+
+    <input type="text" id="firstName" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <br>
+    <button onclick="generateAvatar()">Generate Avatar</button>
+
+    <img id="avatar" src="" alt="Generated Avatar">
+    
+    <script>
+        function generateAvatar() {
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const avatarImg = document.getElementById("avatar");
+
+            if (firstName && lastName) {
+                const fullName = `${firstName} ${lastName}`;
+                const apiUrl = `https://ui-avatars.com/api/?name=${fullName}`;
+                avatarImg.src = apiUrl;
+            } else {
+                alert("Please enter both first name and last name.");
+            }
+        }
+    </script>
+</body>
+</html>

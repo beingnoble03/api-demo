@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Joke Generator</h1>
+
+    <button id="getJokeButton">Get a Joke</button>
+    <p id="joke"></p>
+
+    <script>
+        const getJokeButton = document.getElementById("getJokeButton");
+        const jokeElement = document.getElementById("joke");
+
+        getJokeButton.addEventListener("click", fetchRandomJoke);
+
+        function fetchRandomJoke() {
+            fetch("https://v2.jokeapi.dev/joke/Any")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.type === "single") {
+                        jokeElement.textContent = data.joke;
+                    } else if (data.type === "twopart") {
+                        jokeElement.textContent = `${data.setup} ${data.delivery}`;
+                    }
+                })
+                .catch(error => {
+                    jokeElement.textContent = "Failed to fetch a joke. Please try again later.";
+                });
+        }
+    </script>
+</body>
+</html>
